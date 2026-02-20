@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DBgruppe1Zoo.Repositories;
 
 namespace DBgruppe1Zoo
 {
@@ -19,6 +20,11 @@ namespace DBgruppe1Zoo
         public MainWindow()
         {
             InitializeComponent();
+
+            PersonRepository repos = new PersonRepository();
+
+            repos.GetAll();
+
         }
     }
 }

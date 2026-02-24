@@ -21,7 +21,7 @@ namespace DBgruppe1Zoo
         {
             InitializeComponent();
 
-            PersonRepository repos = new PersonRepository();
+            DyrRepository repos = new DyrRepository();
 
             repos.GetAll();
 

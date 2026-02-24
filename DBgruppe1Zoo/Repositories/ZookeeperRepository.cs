@@ -1,19 +1,18 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Text;
-using Microsoft.Data.Sqlite;
+using System.IO;
 
 namespace DBgruppe1Zoo.Repositories
 {
-    public class PersonRepository
+    internal class ZookeeperRepository
     {
-
         string path = Path.Combine(AppContext.BaseDirectory, "gruppe1.db");
 
 
-        public PersonRepository()
+        public ZookeeperRepository()
         {
         }
 
@@ -26,21 +25,23 @@ namespace DBgruppe1Zoo.Repositories
 
 
 
-                SqliteCommand command = new SqliteCommand("SELECT * FROM animals", connection);
+                SqliteCommand command = new SqliteCommand("SELECT * FROM Zookeeper", connection);
 
                 SqliteDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Debug.WriteLine($"{reader["name"]}");
+                    Debug.WriteLine($"{reader["redskab"]}");
                 }
 
                 connection.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
         }
+
+
     }
 }

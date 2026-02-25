@@ -7,6 +7,35 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <TabControl>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,114,402,10" AutoGenerateColumns="True" Name="dgDyr" IsReadOnly="True"/>
+                    <Button x:Name="btnGem" Content="Gem" HorizontalAlignment="Left" Margin="357,83,0,0" VerticalAlignment="Top" Width="80" Click="btnGem_Click"/>
+                    <Button x:Name="btnNy" Content="Ny" HorizontalAlignment="Left" Margin="267,83,0,0" VerticalAlignment="Top" Width="80" Click="btnNy_Click"/>
+                    <Button x:Name="btnSlet" Content="Slet" HorizontalAlignment="Left" Margin="447,83,0,0" VerticalAlignment="Top" Width="80" Click="btnSlet_Click"/>
+                    <TextBox x:Name="txtAlder" HorizontalAlignment="Left" Margin="337,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="txtAlder_TextChanged"/>
+                    <TextBox x:Name="txtType" HorizontalAlignment="Left" Margin="212,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="txtType_TextChanged"/>
+                    <TextBox x:Name="txtArt" HorizontalAlignment="Left" Margin="87,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="txtArt_TextChanged"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="139,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="da-dk" Text="Art"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Margin="260,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="da-dk" Text="Type"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Margin="383,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="da-dk" Text="Alder"/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Margin="483,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="da-dk" Text="Sikkerhedskrav"/></TextBlock>
+                    <TextBox x:Name="txtSikkerhedskrav" HorizontalAlignment="Left" Margin="462,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="txtSikkerhedskrav_TextChanged"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="608,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text=""/>
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="402,114,10,10" AutoGenerateColumns="True" Name="dgFoderplan" IsReadOnly="True"/>
+                    <TextBox HorizontalAlignment="Left" Margin="587,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="613,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="da-dk" Text="Foderplan ID"/></TextBlock>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

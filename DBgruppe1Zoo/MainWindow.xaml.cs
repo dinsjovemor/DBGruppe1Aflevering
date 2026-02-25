@@ -21,9 +21,44 @@ namespace DBgruppe1Zoo
         {
             InitializeComponent();
 
-            DyrRepository repos = new DyrRepository();
+            DyrRepository dyrRepo = new DyrRepository();
 
-            repos.GetAll();
+            dgDyr.ItemsSource = dyrRepo.GetAll();
+
+        }
+
+        private void btnNy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnGem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSlet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtArt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtType_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtAlder_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtSikkerhedskrav_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }

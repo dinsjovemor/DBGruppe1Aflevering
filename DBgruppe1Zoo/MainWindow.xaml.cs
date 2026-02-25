@@ -38,6 +38,7 @@ namespace DBgruppe1Zoo
         {
             Dyr d = new Dyr { Art = txtArt.Text, Type = txtType.Text, Alder = Convert.ToInt32(txtAlder.Text), Sikkerhedskrav = Convert.ToInt32(txtSikkerhedskrav.Text), FoderplanId = Convert.ToInt32(txtFoderplanID.Text)};
             dyrRepo.Add(d);
+            dgDyr.ItemsSource = dyrRepo.GetAll(); //Genindlæser fra databasen
         }
 
         private void btnSlet_Click(object sender, RoutedEventArgs e)

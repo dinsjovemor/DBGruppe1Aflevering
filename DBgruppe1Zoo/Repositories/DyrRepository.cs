@@ -11,7 +11,7 @@ namespace DBgruppe1Zoo.Repositories
     public class Dyr
     {
         public int Id { get; set; }
-        public string Art {  get; set; }
+        public string Art { get; set; }
         public string Type { get; set; }
         public int Alder { get; set; }
         public int Sikkerhedskrav { get; set; }

@@ -7,40 +7,40 @@ using System.IO;
 
 namespace DBgruppe1Zoo.Repositories
 {
-    internal class FoderplanRepository
+    public class Foderplan
+    {
+        public int foderplanID {  get; set; }
+        public string foder {  get; set; }
+        public string tid { get; set; }
+    }
+
+    public class FoderplanRepository
     {
         string path = Path.Combine(AppContext.BaseDirectory, "gruppe1.db");
-
-
-        public FoderplanRepository()
+        public List<Foderplan> GetAll()
         {
-        }
+            SqliteConnection connection = new SqliteConnection($"Data Source=gruppe1.db;");
+            connection.Open();
 
-        public void GetAll()
-        {
-            try
+            SqliteCommand command = new SqliteCommand("SELECT * FROM Foderplan", connection);
+            SqliteDataReader reader = command.ExecuteReader();
+
+            List<Foderplan> foderplanList = new List<Foderplan>();
+            while (reader.Read())
             {
-                SqliteConnection connection = new SqliteConnection($"Data Source=gruppe1.db;");
-                connection.Open();
+                Foderplan fp = new Foderplan();
+                fp.foderplanID = Convert.ToInt32(reader["foderplan_ID"]);
+                fp.foder = reader["foder"] as string;
+                fp.tid = reader["tid"] as string;
 
-
-
-                SqliteCommand command = new SqliteCommand("SELECT * FROM Foderplan", connection);
-
-                SqliteDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Debug.WriteLine($"{reader["foder"]}");
-                }
-
-                connection.Close();
+                foderplanList.Add(fp);
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
+            return foderplanList;
+
+            connection.Close();
+
         }
-
     }
+
 }
+

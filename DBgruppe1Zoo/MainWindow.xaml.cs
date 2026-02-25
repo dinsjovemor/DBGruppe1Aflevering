@@ -17,14 +17,16 @@ namespace DBgruppe1Zoo
     /// </summary>
     public partial class MainWindow : Window
     {
+        DyrRepository dyrRepo = new DyrRepository();
+        FoderplanRepository foderplanRepo = new FoderplanRepository();
+
         public MainWindow()
         {
             InitializeComponent();
 
-            DyrRepository dyrRepo = new DyrRepository();
-
             dgDyr.ItemsSource = dyrRepo.GetAll();
 
+            dgFoderplan.ItemsSource = foderplanRepo.GetAll();
         }
 
         private void btnNy_Click(object sender, RoutedEventArgs e)
@@ -34,7 +36,8 @@ namespace DBgruppe1Zoo
 
         private void btnGem_Click(object sender, RoutedEventArgs e)
         {
-
+            Dyr d = new Dyr { Art = txtArt.Text, Type = txtType.Text, Alder = Convert.ToInt32(txtAlder.Text), Sikkerhedskrav = Convert.ToInt32(txtSikkerhedskrav.Text), FoderplanId = Convert.ToInt32(txtFoderplanID.Text)};
+            dyrRepo.Add(d);
         }
 
         private void btnSlet_Click(object sender, RoutedEventArgs e)
@@ -58,6 +61,11 @@ namespace DBgruppe1Zoo
         }
 
         private void txtSikkerhedskrav_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtFoderplanID_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

@@ -24,11 +24,21 @@ namespace DBgruppe1Zoo
         {
             InitializeComponent();
 
-            dgDyr.ItemsSource = dyrRepo.GetAll();
+            dgDyr.ItemsSource = dyrRepo.Read();
 
             dgFoderplan.ItemsSource = foderplanRepo.GetAll();
         }
 
+        private void btnOpdater_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgDyr.SelectedItem is Dyr selected)
+            {
+                Dyr d = new Dyr { Id = selected.Id, Art = txtArt.Text, Type = txtType.Text, Alder = Convert.ToInt32(txtAlder.Text), Sikkerhedskrav = Convert.ToInt32(txtSikkerhedskrav.Text), FoderplanId = Convert.ToInt32(txtFoderplanID.Text) };
+                dyrRepo.Update(d);
+                dgDyr.ItemsSource = dyrRepo.Read();
+            }
+
+        }
         private void btnNy_Click(object sender, RoutedEventArgs e)
         {
             txtAlder.Clear();
@@ -49,8 +59,8 @@ namespace DBgruppe1Zoo
             try
             {
                 Dyr d = new Dyr { Art = txtArt.Text, Type = txtType.Text, Alder = Convert.ToInt32(txtAlder.Text), Sikkerhedskrav = Convert.ToInt32(txtSikkerhedskrav.Text), FoderplanId = Convert.ToInt32(txtFoderplanID.Text) };
-                dyrRepo.Add(d);
-                dgDyr.ItemsSource = dyrRepo.GetAll(); //Genindlæser fra databasen
+                dyrRepo.Create(d);
+                dgDyr.ItemsSource = dyrRepo.Read(); //Genindlæser fra databasen
             }
             catch
             {
@@ -66,7 +76,7 @@ namespace DBgruppe1Zoo
                 if (MessageBox.Show($"Er du sikker på at du vil slette {picked.Art}?", "Slet Dyr", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     dyrRepo.Delete(picked);
-                    dgDyr.ItemsSource = dyrRepo.GetAll();
+                    dgDyr.ItemsSource = dyrRepo.Read();
                 }
             }
         }

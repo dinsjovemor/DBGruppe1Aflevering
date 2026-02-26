@@ -13,6 +13,7 @@
                     <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,114,402,10" AutoGenerateColumns="True" Name="dgDyr" IsReadOnly="True" SelectionChanged="dgDyr_SelectionChanged"/>
                     <Button x:Name="btnGem" Content="Gem" HorizontalAlignment="Left" Margin="357,83,0,0" VerticalAlignment="Top" Width="80" Click="btnGem_Click"/>
                     <Button x:Name="btnNy" Content="Ny" HorizontalAlignment="Left" Margin="267,83,0,0" VerticalAlignment="Top" Width="80" Click="btnNy_Click"/>
+                    <Button x:Name="btnOpdater" Content="Opdater" HorizontalAlignment="Left" Margin="175,83,0,0" VerticalAlignment="Top" Width="80" Click="btnOpdater_Click"/>
                     <Button x:Name="btnSlet" Content="Slet" HorizontalAlignment="Left" Margin="447,83,0,0" VerticalAlignment="Top" Width="80" Click="btnSlet_Click"/>
                     <TextBox x:Name="txtAlder" HorizontalAlignment="Left" Margin="337,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="txtAlder_TextChanged" TabIndex="2"/>
                     <TextBox x:Name="txtType" HorizontalAlignment="Left" Margin="212,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="txtType_TextChanged" TabIndex="1"/>

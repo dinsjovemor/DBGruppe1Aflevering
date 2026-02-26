@@ -20,7 +20,7 @@ namespace DBgruppe1Zoo.Repositories
 
     public class DyrRepository
     {
-        public List<Dyr> GetAll() //Læser og printer Dyr tabellen ud fra databasen ind i vores Datagrid
+        public List<Dyr> Read() //Læser og printer Dyr tabellen ud fra databasen ind i vores Datagrid
         {
             var dyrList = new List<Dyr>();
             using var connection = new SqliteConnection("Data Source=gruppe1.db;");
@@ -42,7 +42,7 @@ namespace DBgruppe1Zoo.Repositories
             return dyrList;
         }
 
-        public void Add(Dyr d) //Metode der tilføjer nyt dyr
+        public void Create(Dyr d) //Metode der tilføjer nyt dyr
         {
             SqliteConnection connection = new SqliteConnection($"Data Source=gruppe1.db;");
             connection.Open();
@@ -66,6 +66,24 @@ namespace DBgruppe1Zoo.Repositories
             command.CommandText = "DELETE FROM Dyr WHERE dyr_ID = @id";
             command.Parameters.AddWithValue("@id", d.Id);
             command.ExecuteNonQuery();
+        }
+
+        public void Update(Dyr d)
+        {
+            SqliteConnection connection = new SqliteConnection("Data Source=gruppe1.db;");
+
+            connection.Open();
+
+            SqliteCommand command = new SqliteCommand("UPDATE Dyr SET art = @art, type = @type, alder = @alder, " +
+                    "sikkerhedskrav = @sikkerhedskrav WHERE dyr_ID = @id", connection);
+            command.Parameters.AddWithValue("@art", d.Art);
+            command.Parameters.AddWithValue("@type", d.Type);
+            command.Parameters.AddWithValue("@alder", d.Alder);
+            command.Parameters.AddWithValue("@sikkerhedskrav", d.Sikkerhedskrav);
+            command.Parameters.AddWithValue("@id", d.Id);
+
+            command.ExecuteNonQuery();
+            connection.Close();
         }
     }
 }

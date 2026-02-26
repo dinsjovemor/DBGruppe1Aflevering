@@ -33,8 +33,13 @@ namespace DBgruppe1Zoo
         {
             if (dgDyr.SelectedItem is Dyr selected)
             {
-                Dyr d = new Dyr { Id = selected.Id, Art = txtArt.Text, Type = txtType.Text, Alder = Convert.ToInt32(txtAlder.Text), Sikkerhedskrav = Convert.ToInt32(txtSikkerhedskrav.Text), FoderplanId = Convert.ToInt32(txtFoderplanID.Text) };
-                dyrRepo.Update(d);
+                selected.Art = txtArt.Text;
+                selected.Type = txtType.Text;
+                selected.Alder = Convert.ToInt32(txtAlder.Text);
+                selected.Sikkerhedskrav = Convert.ToInt32(txtSikkerhedskrav.Text);
+                selected.FoderplanId = Convert.ToInt32(txtFoderplanID.Text);
+
+                dyrRepo.Update(selected);
                 dgDyr.ItemsSource = dyrRepo.Read();
             }
 
@@ -49,6 +54,12 @@ namespace DBgruppe1Zoo
 
             btnSlet.IsHitTestVisible = false;
             btnSlet.Opacity = 0.5;
+
+            btnOpdater.IsHitTestVisible = false;
+            btnOpdater.Opacity = 0.5;
+
+            btnGem.IsHitTestVisible = true;
+            btnGem.Opacity = 1;
         }
 
         /// <summary>
@@ -108,8 +119,38 @@ namespace DBgruppe1Zoo
 
         private void dgDyr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            btnSlet.IsHitTestVisible = true;
-            btnSlet.Opacity = 1;
+            if (dgDyr.SelectedItem is Dyr selected)
+            {
+                txtArt.Text = selected.Art;
+                txtType.Text = selected.Type;
+                txtAlder.Text = selected.Alder.ToString();
+                txtSikkerhedskrav.Text = selected.Sikkerhedskrav.ToString();
+                txtFoderplanID.Text = selected.FoderplanId.ToString();
+
+                btnSlet.IsHitTestVisible = true;
+                btnSlet.Opacity = 1;
+
+                btnOpdater.IsHitTestVisible = true;
+                btnOpdater.Opacity = 1;
+
+                btnGem.IsHitTestVisible = false;
+                btnGem.Opacity = 0.5;
+            }
+            else
+            {
+                txtAlder.Clear();
+                txtArt.Clear();
+                txtFoderplanID.Clear();
+                txtSikkerhedskrav.Clear();
+                txtType.Clear();
+
+                btnSlet.IsHitTestVisible = false;
+                btnSlet.Opacity = 0.5;
+
+                btnOpdater.IsHitTestVisible = false;
+                btnOpdater.Opacity = 0.5;
+
+            }
         }
     }
-}
+} 

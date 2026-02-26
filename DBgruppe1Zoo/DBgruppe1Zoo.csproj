@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Content Include="gruppe1.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

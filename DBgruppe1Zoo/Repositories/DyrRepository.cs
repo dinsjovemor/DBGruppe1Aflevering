@@ -22,13 +22,11 @@ namespace DBgruppe1Zoo.Repositories
     {
         public List<Dyr> GetAll() //Læser og printer Dyr tabellen ud fra databasen ind i vores Datagrid
         {
-            SqliteConnection connection = new SqliteConnection($"Data Source=gruppe1.db;");
+            var dyrList = new List<Dyr>();
+            using var connection = new SqliteConnection("Data Source=gruppe1.db;");
             connection.Open();
-
-            SqliteCommand command = new SqliteCommand("SELECT * FROM Dyr", connection);
-            SqliteDataReader reader = command.ExecuteReader();
-
-            List<Dyr> dyrList = new List<Dyr>();
+            using var command = new SqliteCommand("SELECT * FROM Dyr", connection);
+            using var reader = command.ExecuteReader();
             while (reader.Read())
             {
                 Dyr d = new Dyr();
@@ -42,9 +40,6 @@ namespace DBgruppe1Zoo.Repositories
                 dyrList.Add(d);
             }
             return dyrList;
-
-            connection.Close();
-
         }
 
         public void Add(Dyr d) //Metode der tilføjer nyt dyr
@@ -63,21 +58,14 @@ namespace DBgruppe1Zoo.Repositories
             connection.Close();
         }
 
-        public void Delete(Dyr d) //Metode der fjerne dyr fra tabellen
+        public void Delete(Dyr d)
         {
-            SqliteConnection connection = new SqliteConnection($"Data Source=gruppe1.db;");
+            using var connection = new SqliteConnection("Data Source=gruppe1.db;");
             connection.Open();
-
-            string sqlDelete = "DELETE FROM Dyr WHERE art = @art AND type = @type AND alder = @alder AND sikkerhedskrav = @sikkerhedskrav AND foderplan_ID = @foderplan_ID";
-            SqliteCommand command = new SqliteCommand(sqlDelete, connection);
-            command.Parameters.AddWithValue("@art", d.Art);
-            command.Parameters.AddWithValue("@type", d.Type);
-            command.Parameters.AddWithValue("@alder", d.Alder);
-            command.Parameters.AddWithValue("@sikkerhedskrav", d.Sikkerhedskrav);
-            command.Parameters.AddWithValue("@foderplan_ID", d.FoderplanId);
-
+            using var command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Dyr WHERE dyr_ID = @id";
+            command.Parameters.AddWithValue("@id", d.Id);
             command.ExecuteNonQuery();
-            connection.Close();
         }
     }
 }

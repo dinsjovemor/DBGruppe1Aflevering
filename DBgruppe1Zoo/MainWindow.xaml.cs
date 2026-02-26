@@ -31,7 +31,14 @@ namespace DBgruppe1Zoo
 
         private void btnNy_Click(object sender, RoutedEventArgs e)
         {
+            txtAlder.Clear();
+            txtArt.Clear();
+            txtFoderplanID.Clear();
+            txtSikkerhedskrav.Clear();
+            txtType.Clear();
 
+            btnSlet.IsHitTestVisible = false;
+            btnSlet.Opacity = 0.5;
         }
 
         /// <summary>
@@ -54,15 +61,13 @@ namespace DBgruppe1Zoo
 
         private void btnSlet_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (dgDyr.SelectedItem is Dyr picked)
             {
-                Dyr d = new Dyr { Art = txtArt.Text, Type = txtType.Text, Alder = Convert.ToInt32(txtAlder.Text), Sikkerhedskrav = Convert.ToInt32(txtSikkerhedskrav.Text), FoderplanId = Convert.ToInt32(txtFoderplanID.Text) };
-                dyrRepo.Delete(d);
-                dgDyr.ItemsSource = dyrRepo.GetAll();
-            }
-            catch
-            {
-                MessageBox.Show("Indtast venligst et gyldigt dyr");
+                if (MessageBox.Show($"Er du sikker på at du vil slette {picked.Art}?", "Slet Dyr", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    dyrRepo.Delete(picked);
+                    dgDyr.ItemsSource = dyrRepo.GetAll();
+                }
             }
         }
 
@@ -89,6 +94,12 @@ namespace DBgruppe1Zoo
         private void txtFoderplanID_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void dgDyr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnSlet.IsHitTestVisible = true;
+            btnSlet.Opacity = 1;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace DBgruppe1Zoo.Repositories
 
     public class DyrRepository
     {
-        public List<Dyr> GetAll()
+        public List<Dyr> GetAll() //Læser og printer Dyr tabellen ud fra databasen ind i vores Datagrid
         {
             SqliteConnection connection = new SqliteConnection($"Data Source=gruppe1.db;");
             connection.Open();
@@ -47,12 +47,29 @@ namespace DBgruppe1Zoo.Repositories
 
         }
 
-        public void Add(Dyr d)
+        public void Add(Dyr d) //Metode der tilføjer nyt dyr
         {
             SqliteConnection connection = new SqliteConnection($"Data Source=gruppe1.db;");
             connection.Open();
 
             SqliteCommand command = new SqliteCommand("INSERT INTO Dyr (art, type, alder, sikkerhedskrav, foderplan_ID) VALUES (@art, @type, @alder, @sikkerhedskrav, @foderplan_ID)", connection);
+            command.Parameters.AddWithValue("@art", d.Art);
+            command.Parameters.AddWithValue("@type", d.Type);
+            command.Parameters.AddWithValue("@alder", d.Alder);
+            command.Parameters.AddWithValue("@sikkerhedskrav", d.Sikkerhedskrav);
+            command.Parameters.AddWithValue("@foderplan_ID", d.FoderplanId);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
+        public void Delete(Dyr d) //Metode der fjerne dyr fra tabellen
+        {
+            SqliteConnection connection = new SqliteConnection($"Data Source=gruppe1.db;");
+            connection.Open();
+
+            string sqlDelete = "DELETE FROM Dyr WHERE art = @art AND type = @type AND alder = @alder AND sikkerhedskrav = @sikkerhedskrav AND foderplan_ID = @foderplan_ID";
+            SqliteCommand command = new SqliteCommand(sqlDelete, connection);
             command.Parameters.AddWithValue("@art", d.Art);
             command.Parameters.AddWithValue("@type", d.Type);
             command.Parameters.AddWithValue("@alder", d.Alder);
